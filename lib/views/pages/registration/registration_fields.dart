@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:srbs/Controllers/login%20Controllers/registration_controller.dart';
+import 'package:srbs/constants/import_packages.dart';
 
 import '../../widgets/form fields/textfield_widget.dart';
 
@@ -33,13 +32,17 @@ class RegistrationFields extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         TextFieldWidget(
           text: 'Gothram',
-          prefix: Icon(
-            CupertinoIcons.plus_square_on_square,
-            color: Colors.white,
-            size: size.height * 0.034,
+          prefix: Image.asset(
+            AppImages.gothramIcon,
+            width: size.width * 0.1,
+            scale: 24,
+            alignment: Alignment.center,
+            matchTextDirection: true,
+            isAntiAlias: true,
+            gaplessPlayback: true,
           ),
           controller: registrationController.gothramController.value,
           validator: (value) {

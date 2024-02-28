@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/utils/ui_halper.dart';
+import 'package:srbs/views/pages/registration/gender_section.dart';
 import 'package:srbs/views/pages/registration/registration_fields.dart';
-
-import '../../../Controllers/login Controllers/registration_controller.dart';
 
 class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({super.key});
@@ -20,6 +19,7 @@ class RegistrationScreen extends StatelessWidget {
           body: SafeArea(
             bottom: false,
             child: Stack(children: [
+              // Srbs name logo
               Positioned(
                 width: size.width,
                 child: Row(
@@ -32,23 +32,26 @@ class RegistrationScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              // Welcome text.
               Positioned(
-                  top: size.height * 0.1,
-                  width: size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '  Welcome !',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          foreground: Paint()
-                            ..shader = ColorPalette.textShaderSecondaryGrdient,
-                        ),
+                top: size.height * 0.1,
+                width: size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '  Welcome !',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        foreground: Paint()
+                          ..shader = ColorPalette.textShaderSecondaryGrdient,
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
+              // Background back image.
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Image.asset(
@@ -57,6 +60,7 @@ class RegistrationScreen extends StatelessWidget {
                   width: size.width,
                 ),
               ),
+              // Background front image.
               Positioned(
                 bottom: 0,
                 right: -20,
@@ -66,9 +70,10 @@ class RegistrationScreen extends StatelessWidget {
                   width: size.height * 0.34,
                 ),
               ),
+              // Fields Container.
               Positioned(
                   top: size.height * 0.17,
-                  height: size.height * 0.38,
+                  height: size.height * 0.4,
                   left: size.width * 0.05,
                   right: size.width * 0.05,
                   child: Container(
@@ -93,10 +98,10 @@ class RegistrationScreen extends StatelessWidget {
                                 children: [
                                   SizedBox(
                                     width: size.width,
-                                    child: Text(
-                                      index == 1 ? 'Verify OTP' : 'Register',
+                                    child: const Text(
+                                      'Register',
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
@@ -115,64 +120,31 @@ class RegistrationScreen extends StatelessWidget {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  const SizedBox(height: 10),
+                                  const SizedBox(height: 5),
+                                  // Based on position to daiplay the content.
                                   index == 0
-                                      ? RegistrationFields(
+                                      ?
+                                      // Basic fields section.
+                                      RegistrationFields(
                                           size: size,
                                           registrationController:
-                                              registrationController)
-                                      : Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 20),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.asset(
-                                                  AppImages.maleImage,
-                                                  height: size.height * 0.1,
-                                                ),
-                                              ),
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.asset(
-                                                  AppImages.femaleImage,
-                                                  height: size.height * 0.1,
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                              registrationController,
+                                        )
+                                      :
+                                      // Choose gender section.
+                                      GenderSection(
+                                          size: size,
+                                          registrationController:
+                                              registrationController,
                                         ),
                                   SizedBox(height: size.width * 0.1),
+                                  // Action Button Area.
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: () {
-                                          if (registrationController
-                                              .formKey.currentState!
-                                              .validate()) {
-                                            registrationController
-                                                .isValid(false);
-                                            AppUiHelper.dismissKeyboard(
-                                                context: context);
-                                            if (index == 1) {
-                                            } else {
-                                              registrationController
-                                                  .pageController
-                                                  .nextPage(
-                                                      duration: const Duration(
-                                                          milliseconds: 300),
-                                                      curve: Curves.easeInOut);
-                                            }
-                                          } else {
-                                            registrationController
-                                                .isValid(true);
-                                          }
+                                        onTap: () async {
+                                          registrationController.signUp(index);
                                         },
                                         child: Container(
                                           height: size.width * 0.095,

@@ -53,6 +53,7 @@ class TextFieldWidget extends StatelessWidget {
       cursorColor: Colors.white,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
+        contentPadding: contentPadding,
         isDense: true,
         prefixIcon: prefix,
         labelText: text,

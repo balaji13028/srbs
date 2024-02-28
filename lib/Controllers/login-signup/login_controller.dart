@@ -1,0 +1,58 @@
+import 'package:get/get.dart';
+import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/utils/ui_halper.dart';
+
+class LoginController extends GetxController {
+  var islogin = false.obs;
+  var isverifyOTP = false.obs;
+  final formKey = GlobalKey<FormState>();
+  final PageController pageController = PageController();
+  var numberController = TextEditingController().obs;
+  var otpController = TextEditingController().obs;
+  var isValid = false.obs;
+
+  void login(int position) async {
+    if (formKey.currentState!.validate()) {
+      AppUiHelper.dismissKeyboard(context: Get.context!);
+      newUser.mobileNumber = numberController.value.text.trim();
+      if (position == 1) {
+        // OTP section logic.
+        try {
+          isverifyOTP(true);
+          var res = await LoginDetails().verifyOTP(
+              numberController.value.text.trim(),
+              otpController.value.text.trim());
+          if (res['message'] == 'Invalid OTP') {
+            return EasyLoading.showToast(
+              'Invalid OTP',
+              toastPosition: EasyLoadingToastPosition.top,
+            );
+          } else if (res['existance'] == false) {
+            return Get.off(() => RegistrationScreen());
+          } else if (res['existance'] == true) {
+            Get.off(() => const LandingPage());
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('userData', jsonEncode((res['data'])[0]));
+            userController.user.value = UserData.fromMap((res['data'])[0]);
+            prefs.setBool('isAuthenticated', true);
+          } else {
+            ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
+                backgroundColor: Colors.redAccent,
+                content: Text(
+                  'Something Went wrong, Please try agian',
+                  textAlign: TextAlign.center,
+                )));
+          }
+        } finally {
+          isverifyOTP(false);
+        }
+      } else {
+        //Generate OTP
+        LoginDetails().getOTP(numberController.value.text);
+        pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut);
+      }
+    }
+  }
+}

@@ -19,10 +19,10 @@ class AppDefaults {
   /// Default Box Shadow used for containers
   static List<BoxShadow> defaultBoxShadow = [
     BoxShadow(
-      blurRadius: 25,
+      blurRadius: 8,
       spreadRadius: 0,
-      offset: const Offset(0, 2),
-      color: Colors.black.withOpacity(0.08),
+      offset: const Offset(2, 2),
+      color: Colors.grey.withOpacity(0.5),
     ),
   ];
 

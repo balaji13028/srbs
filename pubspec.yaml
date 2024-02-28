@@ -16,8 +16,12 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
-
+  curved_labeled_navigation_bar: ^2.0.2
+  material_design_icons_flutter: ^7.0.7296
   cupertino_icons: ^1.0.2
+  http: ^0.13.5
+  shared_preferences: ^2.2.0
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -34,6 +38,7 @@ flutter:
   assets:
     - assets/images/
     - assets/logo/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
