@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/utils/buttons.dart';
+import 'package:srbs/views/pages/donation/payment_screen.dart';
 
 class DonationCard extends StatelessWidget {
   final Size size;
@@ -98,7 +100,9 @@ class DonationCard extends StatelessWidget {
                       height: size.width * 0.1,
                       text: 'Proceed to pay',
                       borderRadius: 4,
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const Paymentscreen());
+                      },
                     ),
                   ))
             ],

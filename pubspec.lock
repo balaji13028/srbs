@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  decimal:
-    dependency: transitive
-    description:
-      name: decimal
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.5.0"
   fake_async:
     dependency: transitive
     description:
@@ -219,13 +212,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  rational:
+  qr:
     dependency: transitive
     description:
-      name: rational
+      name: qr
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "2.1.0"
+  qr_flutter:
+    dependency: transitive
+    description:
+      name: qr_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -336,20 +336,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.2"
-  universal_io:
-    dependency: transitive
-    description:
-      name: universal_io
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.0"
-  upi_pay:
+  upi_payment_qrcode_generator:
     dependency: "direct main"
     description:
-      name: upi_pay
+      name: upi_payment_qrcode_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.2.0"
   vector_math:
     dependency: transitive
     description:

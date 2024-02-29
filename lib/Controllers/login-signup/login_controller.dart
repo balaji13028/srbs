@@ -3,13 +3,14 @@ import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/utils/ui_halper.dart';
 
 class LoginController extends GetxController {
-  var islogin = false.obs;
+  var isgetOTP = false.obs;
   var isverifyOTP = false.obs;
   final formKey = GlobalKey<FormState>();
   final PageController pageController = PageController();
   var numberController = TextEditingController().obs;
   var otpController = TextEditingController().obs;
   var isValid = false.obs;
+  var islogin = true.obs;
 
   void login(int position) async {
     if (formKey.currentState!.validate()) {

@@ -42,9 +42,11 @@ class LoginScreen extends StatelessWidget {
                   top: size.height * 0.14,
                   left: size.width * 0.05,
                   right: size.width * 0.05,
-                  child: Container(
+                  child: Obx(() => Container(
                       width: size.width,
-                      height: size.height * 0.34,
+                      height: loginController.islogin.value
+                          ? size.width * 0.7
+                          : size.width * 0.8,
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         gradient: ColorPalette.primaryGradient,
@@ -53,7 +55,13 @@ class LoginScreen extends StatelessWidget {
                       child: Form(
                         key: loginController.formKey,
                         child: PageView.builder(
-                            onPageChanged: (value) {},
+                            onPageChanged: (value) {
+                              if (value == 1) {
+                                loginController.islogin(false);
+                              } else {
+                                loginController.islogin(true);
+                              }
+                            },
                             itemCount: 2,
                             controller: loginController.pageController,
                             physics: const NeverScrollableScrollPhysics(),
@@ -219,7 +227,7 @@ class LoginScreen extends StatelessWidget {
                                 ],
                               );
                             }),
-                      ))),
+                      )))),
             ]),
           )),
     );
