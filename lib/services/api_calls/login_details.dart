@@ -61,13 +61,18 @@ class LoginDetails {
       if (response.statusCode == 200) {
         log(response.body);
         Map<String, dynamic> map = jsonDecode(response.body);
-        return UserData(
-          userId: map['_id'].toString(),
-          userName: map['userName'].toString(),
-          mobileNumber: map['mobileNumber'].toString(),
-          gender: map['gender'].toString(),
-          gothram: map['gothram'].toString(),
-        );
+        // return UserData(
+        //   userId: map['_id'].toString(),
+        //   userName: map['userName'].toString(),
+        //   mobileNumber: map['mobileNumber'].toString(),
+        //   gender: map['gender'].toString(),
+        //   gothram: map['gothram'].toString(),
+        //   firstName: map['firstName'].toString(),
+        //   lastName: map['lastName'].toString(),
+        //   address: map['address'].toString(),
+        // );
+
+        return jsonDecode(response.body);
       } else {
         log(response.body);
       }

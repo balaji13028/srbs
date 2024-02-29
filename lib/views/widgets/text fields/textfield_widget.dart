@@ -1,4 +1,4 @@
-import '../../../constants/import_packages.dart';
+import '../../../../../constants/import_packages.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String text;
@@ -6,6 +6,8 @@ class TextFieldWidget extends StatelessWidget {
   final bool readyOnly;
   final bool autofocus;
   final Widget? suffix;
+  final Color? borderColor;
+  final Color? lableColor;
   final Widget? prefix;
   final Function(String? value)? validator;
   final VoidCallback? onTap;
@@ -30,6 +32,8 @@ class TextFieldWidget extends StatelessWidget {
     this.inputFormatters,
     this.keyboardType,
     this.maxLines = 1,
+    this.borderColor,
+    this.lableColor,
     this.contentPadding,
     required this.text,
     this.autovalidateMode,
@@ -49,7 +53,7 @@ class TextFieldWidget extends StatelessWidget {
       keyboardType: keyboardType,
       autovalidateMode: autovalidateMode,
       controller: controller,
-      style: const TextStyle(fontSize: 18, color: Colors.white),
+      style: TextStyle(fontSize: 18, color: borderColor ?? Colors.white),
       cursorColor: Colors.white,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -64,15 +68,15 @@ class TextFieldWidget extends StatelessWidget {
         errorBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.red.shade700)),
         labelStyle: TextStyle(
-          color: ColorPalette.labelTextColor,
+          color: lableColor ?? ColorPalette.labelTextColorwhite,
           fontWeight: FontWeight.w300,
           letterSpacing: 0.8,
           fontSize: 16,
         ),
-        enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white)),
-        focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white)),
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: borderColor ?? Colors.white)),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: borderColor ?? Colors.white)),
       ),
       inputFormatters: inputFormatters,
       validator: (value) {

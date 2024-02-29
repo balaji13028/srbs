@@ -13,7 +13,6 @@ class RegistrationController extends GetxController {
   var female = 'Female';
 
   void signUp(int position) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (position == 0) {
       if (formKey.currentState!.validate()) {
         AppUiHelper.dismissKeyboard(context: Get.context!);
@@ -24,22 +23,28 @@ class RegistrationController extends GetxController {
     } else {
       try {
         isLoading(true);
+        userController.isprofileLoading(true);
         Get.offAll(() => const LandingPage());
         Map<String, dynamic> data = {
           'mobileNumber': newUser.mobileNumber,
           'userName': displayNameController.value.text,
           'gender': gender.value,
           'gothram': gothramController.value.text,
+          // 'firstName': 'null',
+          // 'lastName': 'null',
+          // 'address': 'null',
         };
 
         var res = await LoginDetails().createAccount(data);
         if (res != null) {
-          prefs.setString('userData', jsonEncode((res['data'])[0]));
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('userData', jsonEncode((res['data'])[0]));
           userController.user.value = UserData.fromMap((res['data'])[0]);
-          prefs.setBool('isAuthenticated', true);
+          await prefs.setBool('isAuthenticated', true);
         }
       } finally {
         isLoading(false);
+        userController.isprofileLoading(false);
       }
     }
   }

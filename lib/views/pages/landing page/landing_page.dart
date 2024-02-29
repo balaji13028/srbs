@@ -2,13 +2,10 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:srbs/Controllers/landing%20page/landing_page_controller.dart';
 import 'package:srbs/views/pages/gallery/gallery_page.dart';
 import 'package:srbs/views/pages/transactions/transactions_page.dart';
 
 import '../../../constants/import_packages.dart';
-import '../homepage/homepage.dart';
 
 class LandingPage extends GetView<LandingPageController> {
   const LandingPage({super.key});
@@ -19,10 +16,10 @@ class LandingPage extends GetView<LandingPageController> {
     return Scaffold(
         body: Obx(() => IndexedStack(
               index: controller.tabIndex.value,
-              children: const [
-                GalleryPage(),
+              children: [
+                const GalleryPage(),
                 HomePage(),
-                TransactionsPage(),
+                const TransactionsPage(),
               ],
             )),
         bottomNavigationBar: Obx(() => CurvedNavigationBar(

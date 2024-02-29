@@ -25,13 +25,14 @@ class ColorPalette {
     const Rect.fromLTWH(100.0, 10.0, 160.0, 0.0),
   );
 
-  static Color labelTextColor = Colors.white.withOpacity(0.7);
+  static Color labelTextColorwhite = Colors.white.withOpacity(0.7);
+  static Color labelTextColorgrey = const Color(0xff4b4b4b).withOpacity(0.6);
 
   static const Color primaryColor = Color(0xff000040);
   static const Color secondaryColor = Color(0xffE69702);
   static const Color backGroundColor = Color(0xffEEEEEE);
   static const Color lightprimaryColor = Color(0xffDFDFED);
-
+  static const Color geryColor = Color(0xff4b4b4b);
   static const Color lightGreenColor = Color(0xffc3eca4);
   static const Color darkGreenColor = Color(0xff4c7c27);
 }

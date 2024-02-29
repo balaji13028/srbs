@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:srbs/constants/import_packages.dart';
 
-import '../../widgets/form fields/textfield_widget.dart';
-
 class RegistrationFields extends StatelessWidget {
   final Size size;
   final RegistrationController registrationController;

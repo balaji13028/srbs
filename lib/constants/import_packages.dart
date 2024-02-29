@@ -38,6 +38,10 @@ export 'package:srbs/views/pages/registration/registration_screen.dart';
 export 'package:srbs/views/pages/registration/registration_fields.dart';
 export 'package:srbs/views/pages/registration/gender_section.dart';
 export 'package:srbs/views/pages/landing page/landing_page.dart';
+export 'package:srbs/views/pages/donation/donation_card.dart';
+
+//Widgets folder
+export 'package:srbs/views/widgets/text fields/textfield_widget.dart';
 
 // plugins
 export 'package:flutter_easyloading/flutter_easyloading.dart';

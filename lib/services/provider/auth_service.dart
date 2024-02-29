@@ -15,6 +15,7 @@ class AuthService extends GetxController {
     isAuthenticated.value = prefs.getBool('isAuthenticated') ?? false;
     if (prefs.containsKey('userData')) {
       var jsonDeatils = jsonDecode(prefs.getString('userData')!);
+
       userController.user.value = UserData.fromMap(jsonDeatils);
     }
     Future.delayed(const Duration(seconds: 2), () {

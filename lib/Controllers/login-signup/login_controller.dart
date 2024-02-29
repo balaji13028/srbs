@@ -17,34 +17,35 @@ class LoginController extends GetxController {
       newUser.mobileNumber = numberController.value.text.trim();
       if (position == 1) {
         // OTP section logic.
-        try {
-          isverifyOTP(true);
-          var res = await LoginDetails().verifyOTP(
-              numberController.value.text.trim(),
-              otpController.value.text.trim());
-          if (res['message'] == 'Invalid OTP') {
-            return EasyLoading.showToast(
-              'Invalid OTP',
-              toastPosition: EasyLoadingToastPosition.top,
-            );
-          } else if (res['existance'] == false) {
-            return Get.off(() => RegistrationScreen());
-          } else if (res['existance'] == true) {
+
+        var res = await LoginDetails().verifyOTP(
+            numberController.value.text.trim(),
+            otpController.value.text.trim());
+        if (res['message'] == 'Invalid OTP') {
+          return EasyLoading.showToast(
+            'Invalid OTP',
+            toastPosition: EasyLoadingToastPosition.top,
+          );
+        } else if (res['existance'] == false) {
+          return Get.off(() => RegistrationScreen());
+        } else if (res['existance'] == true) {
+          try {
+            isverifyOTP(true);
             Get.off(() => const LandingPage());
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.setString('userData', jsonEncode((res['data'])[0]));
             userController.user.value = UserData.fromMap((res['data'])[0]);
             prefs.setBool('isAuthenticated', true);
-          } else {
-            ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
-                backgroundColor: Colors.redAccent,
-                content: Text(
-                  'Something Went wrong, Please try agian',
-                  textAlign: TextAlign.center,
-                )));
+          } finally {
+            isverifyOTP(false);
           }
-        } finally {
-          isverifyOTP(false);
+        } else {
+          ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: Text(
+                'Something Went wrong, Please try agian',
+                textAlign: TextAlign.center,
+              )));
         }
       } else {
         //Generate OTP

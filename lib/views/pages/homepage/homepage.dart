@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:srbs/Controllers/home%20Controllers/home_controller.dart';
 import 'package:srbs/constants/import_packages.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final homecOntroller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +46,13 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(AppImages.backGroundImage),
+                fit: BoxFit.cover),
+          ),
           child: Column(
             children: [
               const SizedBox(height: 5),
@@ -52,25 +60,38 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               UpcoimgEvents(size: size),
               const SizedBox(height: 20),
-              Container(
-                height: size.width * .12,
-                width: size.width,
-                decoration: BoxDecoration(
-                  gradient: ColorPalette.secondaryGrdient,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      CupertinoIcons.arrow_right,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Make Donation'),
-                  ],
+              GestureDetector(
+                onTap: () {
+                  Get.dialog(DonationCard(size: size));
+                },
+                child: Container(
+                  height: size.width * .12,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    gradient: ColorPalette.secondaryGrdient,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        CupertinoIcons.arrow_right,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Make Donation',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

@@ -37,7 +37,7 @@ class UserData {
 
   factory UserData.fromMap(Map<String, dynamic> map) {
     return UserData(
-      userId: map['userId'] != null ? map['userId'] as String : null,
+      userId: map['_id'] != null ? map['_id'] as String : null,
       userName: map['userName'] != null ? map['userName'] as String : null,
       firstName: map['firstName'] != null ? map['firstName'] as String : null,
       lastName: map['lastName'] != null ? map['lastName'] as String : null,
