@@ -30,7 +30,6 @@ class RegistrationFields extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(height: 5),
         TextFieldWidget(
           text: 'Gothram',
           prefix: Image.asset(

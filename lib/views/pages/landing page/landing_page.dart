@@ -2,9 +2,6 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:srbs/views/pages/gallery/gallery_page.dart';
-import 'package:srbs/views/pages/transactions/transactions_page.dart';
-
 import '../../../constants/import_packages.dart';
 
 class LandingPage extends GetView<LandingPageController> {
@@ -14,16 +11,12 @@ class LandingPage extends GetView<LandingPageController> {
   Widget build(BuildContext context) {
     Get.put(LandingPageController());
     return Scaffold(
-        body: Obx(() => IndexedStack(
-              index: controller.tabIndex.value,
-              children: [
-                const GalleryPage(),
-                HomePage(),
-                const TransactionsPage(),
-              ],
-            )),
+        extendBody: true,
+        body: Obx(
+          () => controller.pages[controller.tabIndex.value],
+        ),
         bottomNavigationBar: Obx(() => CurvedNavigationBar(
-              color: ColorPalette.primaryColor.withOpacity(0.8),
+              color: const Color(0xff333366),
               backgroundColor: Colors.transparent,
               index: controller.tabIndex.value,
               buttonBackgroundColor: ColorPalette.bottomNavButtonGradient,

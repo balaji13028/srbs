@@ -49,15 +49,17 @@
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
   	<array>
-    	<string>freecharge</string>
-    	<string>gpay</string>
-    	<string>in.fampay.app</string>
-    	<string>mobikwik</string>
-    	<string>paytm</string>
-    	<string>phonepe</string>
-    	<string>upi</string>
-    	<string>upibillpay</string>
-    	<string>whatsapp</string>
+        <string>cred</string>
+        <string>gpay</string>
+        <string>myairtel</string>
+        <string>myJio</string>
+        <string>paytmmp</string>
+        <string>payzapp</string>
+        <string>phonepe</string>
+        <string>ucoupi</string>
+        <string>upi</string>
+        <string>tez</string>
+        <string>whatsapp</string>
   </array>
 </dict>
 </plist>

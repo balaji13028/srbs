@@ -68,7 +68,7 @@ class ProfileCard extends StatelessWidget {
                           children: [
                             Container(
                               width: size.width * 0.1,
-                              height: size.height * 0.04,
+                              height: size.width * 0.08,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -100,10 +100,10 @@ class ProfileCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10),
                     child: Row(
-                      children: const [
+                      children: [
                         Text(
                           'Profile Status:',
                           style: TextStyle(

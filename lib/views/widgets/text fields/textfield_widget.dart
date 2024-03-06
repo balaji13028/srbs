@@ -10,6 +10,7 @@ class TextFieldWidget extends StatelessWidget {
   final Color? lableColor;
   final Widget? prefix;
   final Function(String? value)? validator;
+  final Function(String? value)? onchanged;
   final VoidCallback? onTap;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
@@ -21,6 +22,7 @@ class TextFieldWidget extends StatelessWidget {
 
   const TextFieldWidget({
     super.key,
+    this.onchanged,
     this.initialValue,
     this.controller,
     this.onTap,
@@ -54,7 +56,7 @@ class TextFieldWidget extends StatelessWidget {
       autovalidateMode: autovalidateMode,
       controller: controller,
       style: TextStyle(fontSize: 18, color: borderColor ?? Colors.white),
-      cursorColor: Colors.white,
+      cursorColor: borderColor ?? Colors.white,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: contentPadding,
@@ -62,7 +64,7 @@ class TextFieldWidget extends StatelessWidget {
         prefixIcon: prefix,
         labelText: text,
         errorStyle:
-            TextStyle(fontSize: 10, color: Colors.red.shade700, height: 0.6),
+            TextStyle(fontSize: 10, color: Colors.red.shade700, height: 0.1),
         focusedErrorBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.red.shade700)),
         errorBorder: UnderlineInputBorder(
@@ -84,6 +86,13 @@ class TextFieldWidget extends StatelessWidget {
           return validator!(value);
         } else {
           return null;
+        }
+      },
+      onChanged: (value) {
+        if (onchanged != null) {
+          onchanged!(value);
+        } else {
+          return;
         }
       },
     );

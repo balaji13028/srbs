@@ -1,10 +1,6 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
-import 'package:srbs/services/provider/auth_service.dart';
 import 'package:srbs/utils/ui_halper.dart';
-import 'package:srbs/views/pages/landing%20page/landing_page.dart';
-import 'package:srbs/views/pages/login/login_screen.dart';
-import 'package:srbs/views/pages/login/splash.screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +19,17 @@ class MyApp extends StatelessWidget {
       title: 'SRBS',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Averia Serif Libre',
+        appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+              fontFamily: 'Averia Serif Libre',
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+            backgroundColor: ColorPalette.primaryColor,
+            iconTheme: IconThemeData(color: Colors.white),
+            centerTitle: true,
+            foregroundColor: Colors.white),
         colorScheme: Theme.of(context).colorScheme.copyWith(
               primary: ColorPalette.primaryColor,
               primaryContainer: ColorPalette.primaryColor,

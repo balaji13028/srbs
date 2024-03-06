@@ -11,8 +11,10 @@ class AppImages {
   static const String registrationBGImage = 'assets/images/register-2.png';
   static const String flagImage = 'assets/images/flag.png';
   static const String backGroundImage = 'assets/images/background.png';
+  static const String invitaionImage = 'assets/images/invitation.png';
 
   // Icons folder
   static const String gothramIcon = 'assets/icons/gotram.png';
   static const String otpIcon = 'assets/icons/otp.png';
+  static const String upiIcon = 'assets/icons/upi.png';
 }

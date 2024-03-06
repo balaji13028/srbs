@@ -39,104 +39,101 @@ class LoginScreen extends StatelessWidget {
 
               /// Login container box.
               Positioned(
-                  top: size.height * 0.14,
-                  left: size.width * 0.05,
-                  right: size.width * 0.05,
-                  child: Obx(() => Container(
-                      width: size.width,
-                      height: loginController.islogin.value
-                          ? size.width * 0.7
-                          : size.width * 0.8,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        gradient: ColorPalette.primaryGradient,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Form(
-                        key: loginController.formKey,
-                        child: PageView.builder(
-                            onPageChanged: (value) {
-                              if (value == 1) {
-                                loginController.islogin(false);
-                              } else {
-                                loginController.islogin(true);
-                              }
-                            },
-                            itemCount: 2,
-                            controller: loginController.pageController,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: size.width,
-                                    child: Text(
-                                      index == 1 ? 'Verify OTP' : 'Login',
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
+                top: size.height * 0.14,
+                left: size.width * 0.05,
+                right: size.width * 0.05,
+                child: Container(
+                    width: size.width,
+                    height: size.width * 0.82,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      gradient: ColorPalette.primaryGradient,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Form(
+                      key: loginController.formKey,
+                      child: PageView.builder(
+                          onPageChanged: (value) {},
+                          itemCount: 2,
+                          controller: loginController.pageController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: size.width,
+                                  child: Text(
+                                    index == 1 ? 'Verify OTP' : 'Login',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  const SizedBox(height: 15),
-                                  Wrap(
-                                    spacing: 1,
-                                    runSpacing: 1.4,
-                                    children: [
-                                      Text(
-                                        index == 1
-                                            ? 'Please enter 6 digits verification code sent to your mobile number '
-                                            : 'Enter mobile number to receive one time password',
+                                ),
+                                const SizedBox(height: 10),
+                                index == 0
+                                    ? const Text(
+                                        'Enter mobile number to receive one time password',
                                         textAlign: TextAlign.left,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                         ),
+                                      )
+                                    : Wrap(
+                                        children: [
+                                          RichText(
+                                              text: TextSpan(children: [
+                                                const TextSpan(
+                                                  text:
+                                                      'Please enter 6 digits verification code sent to your mobile number ',
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    height: 1.4,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      '+91-${loginController.numberController.value.text}.  ',
+                                                  style: const TextStyle(
+                                                    fontSize: 12,
+                                                    height: 1.4,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: 'Wrong number?',
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                    height: 1.4,
+                                                    decoration: TextDecoration
+                                                        .underline,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: ColorPalette
+                                                        .primaryColor,
+                                                  ),
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () =>
+                                                            loginController
+                                                                .gotoPage(0),
+                                                ),
+                                              ]),
+                                              textScaler:
+                                                  const TextScaler.linear(1.1)),
+                                        ],
                                       ),
-                                      Text(
-                                        index == 1
-                                            ? '+91-${loginController.numberController.value.text}.  '
-                                            : '',
-                                        textAlign: TextAlign.left,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          loginController.pageController
-                                              .previousPage(
-                                            duration: const Duration(
-                                                milliseconds: 300),
-                                            curve: Curves.easeInBack,
-                                          );
-                                          loginController.otpController.value
-                                              .clear();
-                                        },
-                                        child: Text(
-                                          index == 1 ? 'Wrong number?' : '',
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                            fontSize: 10,
-                                            height: 0,
-                                            decoration:
-                                                TextDecoration.underline,
-                                            fontWeight: FontWeight.w700,
-                                            color: ColorPalette.primaryColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Obx(() => index == 1
+                                const SizedBox(height: 10),
+                                Obx(
+                                  () => index == 1
                                       ? TextFieldWidget(
                                           text: 'Enter OTP',
                                           controller: loginController
@@ -192,42 +189,44 @@ class LoginScreen extends StatelessWidget {
                                             }
                                             return null;
                                           },
-                                        )),
-                                  SizedBox(height: size.width * 0.12),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () async {
-                                          loginController.login(index);
-                                        },
-                                        child: Container(
-                                          height: size.width * 0.095,
-                                          width: size.width * 0.3,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            gradient:
-                                                ColorPalette.secondaryGrdient,
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          child: Text(
-                                            index == 1 ? 'Verify' : 'Get OTP',
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 0.7,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
+                                        ),
+                                ),
+                                SizedBox(height: size.width * 0.1),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () async {
+                                        loginController.login(index);
+                                      },
+                                      child: Container(
+                                        height: size.width * 0.095,
+                                        width: size.width * 0.3,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          gradient:
+                                              ColorPalette.secondaryGrdient,
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                        child: Text(
+                                          index == 1 ? 'Verify' : 'Get OTP',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            letterSpacing: 0.7,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            }),
-                      )))),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          }),
+                    )),
+              ),
             ]),
           )),
     );

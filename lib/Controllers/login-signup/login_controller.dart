@@ -12,6 +12,15 @@ class LoginController extends GetxController {
   var isValid = false.obs;
   var islogin = true.obs;
 
+  gotoPage(index) async {
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+    );
+    otpController.value.clear();
+  }
+
   void login(int position) async {
     if (formKey.currentState!.validate()) {
       AppUiHelper.dismissKeyboard(context: Get.context!);
@@ -50,10 +59,10 @@ class LoginController extends GetxController {
         }
       } else {
         //Generate OTP
-        LoginDetails().getOTP(numberController.value.text);
-        pageController.nextPage(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut);
+        islogin(false);
+        var otp = LoginDetails().getOTP(numberController.value.text);
+        gotoPage(1);
+        otpController.value.text = await otp;
       }
     }
   }

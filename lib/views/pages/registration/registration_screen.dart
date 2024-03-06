@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/utils/ui_halper.dart';
-import 'package:srbs/views/pages/registration/gender_section.dart';
-import 'package:srbs/views/pages/registration/registration_fields.dart';
 
 class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({super.key});
@@ -67,13 +65,13 @@ class RegistrationScreen extends StatelessWidget {
                 child: Image.asset(
                   AppImages.registrationFGImage,
                   fit: BoxFit.contain,
-                  width: size.height * 0.34,
+                  width: size.height * 0.3,
                 ),
               ),
               // Fields Container.
               Positioned(
                   top: size.height * 0.17,
-                  height: size.height * 0.4,
+                  height: size.width * 0.92,
                   left: size.width * 0.05,
                   right: size.width * 0.05,
                   child: Container(

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:srbs/constants/import_packages.dart';
 
 class AppDefaults {
@@ -28,4 +29,6 @@ class AppDefaults {
 
   /// Default Animation Duration used for the entire app
   static Duration defaultDuration = const Duration(milliseconds: 300);
+
+  String dateFormat(date) => DateFormat('dd/MM/yy').format(date).toString();
 }
