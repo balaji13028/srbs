@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:srbs/Controllers/donation/donation_contrller.dart';
 import 'package:srbs/Models/transaction%20models/donation_type.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/services/provider/razorpay_integration.dart';
@@ -19,19 +18,8 @@ class DonationCard extends StatefulWidget {
 }
 
 class _DonationCardState extends State<DonationCard> {
-  final controller = Get.put(RazorpayIntegration());
-  String? id;
-  String? value;
-  int index = -1;
-  String donationType = '';
-  TextEditingController name = TextEditingController();
-
-  TextEditingController amount = TextEditingController();
-
-  TextEditingController forname = TextEditingController();
-  TextEditingController desc = TextEditingController();
-  TextEditingController gothram = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final razorpayController = Get.put(RazorpayIntegration());
+  final donationController = Get.put(DonationController());
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +44,7 @@ class _DonationCardState extends State<DonationCard> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 15),
                     child: Form(
-                      key: formKey,
+                      key: donationController.formKey,
                       child: Column(
                         children: [
                           const SizedBox(height: 10),
@@ -79,8 +67,10 @@ class _DonationCardState extends State<DonationCard> {
                                 (i) => DropdownMenuItem(
                                   onTap: () {
                                     setState(() {
-                                      index = i;
-                                      formKey.currentState!.reset();
+                                      donationController.updateDeatils(
+                                        i,
+                                        widget.donationDetails,
+                                      );
                                     });
                                   },
                                   value: widget.donationDetails[i].title,
@@ -88,36 +78,18 @@ class _DonationCardState extends State<DonationCard> {
                                       .toString()),
                                 ),
                               ),
-                              initialValue: value,
+                              initialValue: donationController.value,
                               onChanged: (value) {
                                 setState(() {
                                   value = value;
-                                  id = widget.donationDetails[index].id;
-                                  donationType = widget
-                                      .donationDetails[index].title
-                                      .toString();
-                                  name.text =
-                                      widget.donationDetails[index].title ==
-                                              'Others'
-                                          ? ''
-                                          : widget.donationDetails[index].title
-                                              .toString();
-
-                                  amount.text =
-                                      widget.donationDetails[index].title ==
-                                              'Others'
-                                          ? ''
-                                          : widget.donationDetails[index].amount
-                                              .toString();
-                                  desc.text = widget
-                                      .donationDetails[index].description
-                                      .toString();
                                 });
                               }),
                           Visibility(
-                            visible: donationType == 'Others' ? true : false,
+                            visible: donationController.donationType == 'Others'
+                                ? true
+                                : false,
                             child: TextFieldWidget(
-                              controller: name,
+                              controller: donationController.name,
                               text: 'Donation Name',
                               borderColor: ColorPalette.greyColor,
                               lableColor: ColorPalette.labelTextColorgrey,
@@ -133,9 +105,12 @@ class _DonationCardState extends State<DonationCard> {
                           ),
                           const SizedBox(height: 8),
                           TextFieldWidget(
-                            controller: amount,
+                            controller: donationController.amount,
                             text: 'Amount',
-                            readyOnly: donationType == 'Others' ? false : true,
+                            readyOnly:
+                                donationController.donationType == 'Others'
+                                    ? false
+                                    : true,
                             borderColor: ColorPalette.greyColor,
                             lableColor: ColorPalette.labelTextColorgrey,
                             contentPadding: const EdgeInsets.only(
@@ -151,13 +126,13 @@ class _DonationCardState extends State<DonationCard> {
                             ],
                             onchanged: (value) {
                               setState(() {
-                                amount.text = value!;
+                                donationController.amount.text = value!;
                               });
                             },
                           ),
                           const SizedBox(height: 8),
                           TextFieldWidget(
-                            controller: forname,
+                            controller: donationController.forname,
                             text: 'For',
                             borderColor: ColorPalette.greyColor,
                             lableColor: ColorPalette.labelTextColorgrey,
@@ -166,7 +141,7 @@ class _DonationCardState extends State<DonationCard> {
                           ),
                           const SizedBox(height: 8),
                           TextFieldWidget(
-                            controller: gothram,
+                            controller: donationController.gothram,
                             text: 'Gothram',
                             borderColor: ColorPalette.greyColor,
                             lableColor: ColorPalette.labelTextColorgrey,
@@ -187,65 +162,45 @@ class _DonationCardState extends State<DonationCard> {
                                     const EdgeInsets.only(left: 10, right: 5),
                                 dense: true,
                                 title: const Text('Total'),
-                                subtitle: Expanded(
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          amount.text.isNotEmpty
-                                              ? amount.text
-                                              : '00',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            height: 1,
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorPalette.primaryColor,
-                                          ),
-                                        ),
-                                      ),
-                                      const Text(
-                                        '.00 INR',
+                                subtitle: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        donationController
+                                                .amount.text.isNotEmpty
+                                            ? donationController.amount.text
+                                            : '00',
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          height: 1.5,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          height: 1,
                                           fontWeight: FontWeight.bold,
                                           color: ColorPalette.primaryColor,
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    const Text(
+                                      '.00 INR',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        height: 1.5,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorPalette.primaryColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 trailing: Buttons().secondaryGradientButton(
                                   width: widget.size.width * 0.4,
                                   height: widget.size.width * 0.1,
                                   text: 'Proceed to pay',
                                   borderRadius: 4,
-                                  onTap: () {
-                                    if (formKey.currentState!.validate()) {
-                                      var options = {
-                                        "donationName": name.text,
-                                        "userId":
-                                            userController.user.value.userId,
-                                        "amount": amount.text,
-                                        "description": desc.text,
-                                        "for": forname.text.isEmpty
-                                            ? ''
-                                            : forname.text,
-                                        "gothram": gothram.text.isEmpty
-                                            ? ''
-                                            : gothram.text,
-                                      };
-                                      const CircularProgressIndicator();
-                                      controller.initiatePayment(
-                                        name.text,
-                                        int.parse(amount.text.toString()),
-                                        options,
-                                      );
-                                      Get.back();
-                                    }
+                                  onTap: () async {
+                                    donationController.usingRazorpayPayment(
+                                      razorpayController,
+                                    );
                                   },
                                 ),
                               ))

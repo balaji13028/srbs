@@ -48,7 +48,7 @@
         <package android:name="com.myairtelapp"/>
     </queries>
    <application
-        android:label="srbs"
+        android:label="SRBS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

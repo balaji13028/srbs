@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/services/provider/shared_preference.dart';
 import 'package:srbs/utils/ui_halper.dart';
 
 class LoginController extends GetxController {
@@ -41,11 +42,14 @@ class LoginController extends GetxController {
         } else if (res['existance'] == true) {
           try {
             isverifyOTP(true);
-            Get.off(() => const LandingPage());
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString('userData', jsonEncode((res['data'])[0]));
             userController.user.value = UserData.fromMap((res['data'])[0]);
-            prefs.setBool('isAuthenticated', true);
+            checkStatus();
+            Get.off(() => const LandingPage());
+            SharedPreferencesService prefs = SharedPreferencesService.to;
+            await prefs.saveUserData(jsonEncode(userController.user));
+            prefs.setboolData('isAuthenticated', true);
+            numberController.value.clear();
+            gotoPage(0);
           } finally {
             isverifyOTP(false);
           }
@@ -65,5 +69,21 @@ class LoginController extends GetxController {
         otpController.value.text = await otp;
       }
     }
+  }
+
+  @override
+  void dispose() {
+    numberController.value.dispose();
+    otpController.value.dispose();
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void onClose() {
+    numberController.value.dispose();
+    otpController.value.dispose();
+    pageController.dispose();
+    super.onClose();
   }
 }

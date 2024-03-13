@@ -13,6 +13,7 @@ class EventController extends GetxController {
   }
 
   fetchEvents() async {
+    eventList.value = [];
     try {
       isloading(true);
       var data = await EventDeatils().getEvents();

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/services/provider/shared_preference.dart';
 
 class AuthService extends GetxController {
   RxBool isAuthenticated = false.obs;
@@ -11,28 +12,39 @@ class AuthService extends GetxController {
   }
 
   Future<void> checkLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isAuthenticated.value = prefs.getBool('isAuthenticated') ?? false;
-    if (prefs.containsKey('userData')) {
-      var jsonDeatils = jsonDecode(prefs.getString('userData')!);
-
-      userController.user.value = UserData.fromMap(jsonDeatils);
+    SharedPreferencesService prefs = SharedPreferencesService.to;
+    isAuthenticated.value = prefs.getboolData('isAuthenticated') ?? false;
+    // Checking the userdata key is there or not.
+    if (prefs.isContinekey('userData') == true) {
+      userController.user.value = prefs.getUserData()!;
     }
     Future.delayed(const Duration(seconds: 2), () {
       if (isAuthenticated.value) {
         Get.offNamed('/landingPage'); // Navigate to home page
       } else {
-        Get.offNamed('/login');
+        Navigator.of(Get.context!)
+            .pushReplacement(createRoute()); // Navigate to login page.
       }
+      // });
     });
   }
 
-  Future<void> logout() async {
-    // Clear authentication status in shared preferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isAuthenticated', false);
-    await prefs.remove('userData');
-    isAuthenticated.value = false;
-    Get.offNamed('/login'); // Navigate to login page
+  Route createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => LoginScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOut;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
   }
 }

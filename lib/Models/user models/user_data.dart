@@ -10,6 +10,8 @@ class UserData {
   String? gender;
   String? address;
   String? mobileNumber;
+  String? avatar;
+  String? profileStatus;
 
   UserData({
     this.userId,
@@ -20,11 +22,13 @@ class UserData {
     this.address,
     this.gothram,
     this.mobileNumber,
+    this.avatar,
+    this.profileStatus = '57%',
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'userId': userId,
+      '_id': userId,
       'userName': userName,
       'firstName': firstName,
       'lastName': lastName,
@@ -32,6 +36,8 @@ class UserData {
       'address': address,
       'mobileNumber': mobileNumber,
       'gothram': gothram,
+      'avatar': avatar,
+      'profileStatus': profileStatus,
     };
   }
 
@@ -45,6 +51,8 @@ class UserData {
       address: map['address'] != null ? map['address'] as String : null,
       mobileNumber: map['mobileNumber'].toString(),
       gothram: map['gothram'].toString(),
+      avatar: map['avatar'].toString(),
+      profileStatus: map['profileStatus'].toString(),
     );
   }
 
@@ -55,7 +63,7 @@ class UserData {
 
   @override
   String toString() {
-    return 'UserData(userId: $userId, userName: $userName, firstName: $firstName, lastName: $lastName, gender: $gender, address: $address, mobileNumber:$mobileNumber, gothram:$gothram)';
+    return 'UserData(userId: $userId, userName: $userName, firstName: $firstName, lastName: $lastName, gender: $gender, address: $address, mobileNumber:$mobileNumber, gothram:$gothram, avatar:$avatar, profileStatus:$profileStatus)';
   }
 }
 

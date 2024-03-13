@@ -22,39 +22,42 @@ class LandingPage extends GetView<LandingPageController> {
               buttonBackgroundColor: ColorPalette.bottomNavButtonGradient,
               items: [
                 CurvedNavigationBarItem(
-                    child: const Icon(
-                      CupertinoIcons.photo_on_rectangle,
-                      color: Colors.white,
-                    ),
-                    label: 'Gallery',
-                    labelStyle: TextStyle(
-                      color: 0 != controller.tabIndex.value
-                          ? Colors.white
-                          : Colors.transparent,
-                    )),
+                  child: const Icon(
+                    CupertinoIcons.photo_on_rectangle,
+                    color: Colors.white,
+                  ),
+                  label: 'Gallery',
+                  labelStyle: TextStyle(
+                    color: 0 != controller.tabIndex.value
+                        ? Colors.white
+                        : Colors.transparent,
+                  ),
+                ),
                 CurvedNavigationBarItem(
-                    child: Icon(
-                      MdiIcons.viewDashboardOutline,
-                      color: Colors.white,
-                    ),
-                    label: 'Home',
-                    labelStyle: TextStyle(
-                      color: 1 != controller.tabIndex.value
-                          ? Colors.white
-                          : Colors.transparent,
-                    )),
+                  child: Icon(
+                    MdiIcons.viewDashboardOutline,
+                    color: Colors.white,
+                  ),
+                  label: 'Home',
+                  labelStyle: TextStyle(
+                    color: 1 != controller.tabIndex.value
+                        ? Colors.white
+                        : Colors.transparent,
+                  ),
+                ),
                 CurvedNavigationBarItem(
-                    child: Icon(
-                      MdiIcons.swapHorizontal,
-                      color: Colors.white,
-                      size: 32,
-                    ),
-                    label: 'Transactions',
-                    labelStyle: TextStyle(
-                      color: 2 != controller.tabIndex.value
-                          ? Colors.white
-                          : Colors.transparent,
-                    ))
+                  child: Icon(
+                    MdiIcons.swapHorizontal,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  label: 'Transactions',
+                  labelStyle: TextStyle(
+                    color: 2 != controller.tabIndex.value
+                        ? Colors.white
+                        : Colors.transparent,
+                  ),
+                )
               ],
               height: 85,
               onTap: (value) => controller.changeTabIndex(value),

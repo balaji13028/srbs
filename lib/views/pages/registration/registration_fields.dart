@@ -15,10 +15,12 @@ class RegistrationFields extends StatelessWidget {
     return Column(
       children: [
         TextFieldWidget(
+          borderColor: Colors.black,
+          lableColor: Colors.black54,
           text: 'Display Name',
           prefix: Icon(
             CupertinoIcons.person,
-            color: Colors.white,
+            color: Colors.black,
             size: size.height * 0.034,
           ),
           controller: registrationController.displayNameController.value,
@@ -31,11 +33,14 @@ class RegistrationFields extends StatelessWidget {
           },
         ),
         TextFieldWidget(
+          borderColor: Colors.black,
+          lableColor: Colors.black54,
           text: 'Gothram',
           prefix: Image.asset(
             AppImages.gothramIcon,
             width: size.width * 0.1,
             scale: 24,
+            color: Colors.black,
             alignment: Alignment.center,
             matchTextDirection: true,
             isAntiAlias: true,

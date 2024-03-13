@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:srbs/Controllers/event/event_controller.dart';
 import 'package:srbs/Models/events.%20models/event_data.dart';
 import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/views/pages/events/event_view_page.dart';
 import 'package:srbs/views/widgets/skeleton%20loading/event_card.dart';
 
 class EventPage extends StatelessWidget {
@@ -13,35 +14,37 @@ class EventPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+        backgroundColor: ColorPalette.backGroundColor,
         appBar: AppBar(
           title: const Text('Events'),
         ),
         body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(AppImages.backGroundImage),
-                  fit: BoxFit.cover),
-            ),
-            child: Obx(
-              () => controller.isloading.value
-                  ? EventSkeletonSample(size: size)
-                  : controller.eventList.isEmpty
-                      ? const Center(
-                          child: Text('No Events'),
-                        )
-                      : ListView.separated(
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: 10),
-                          itemCount: controller.eventList.length,
-                          itemBuilder: (context, index) {
-                            EventData event = controller.eventList[index];
-                            return Card(
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 6, horizontal: 10),
-                                elevation: 4,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await controller.fetchEvents();
+              },
+              child: Obx(
+                () => controller.isloading.value
+                    ? EventSkeletonSample(size: size)
+                    : controller.eventList.isEmpty
+                        ? const Center(
+                            child: Text('No Events'),
+                          )
+                        : ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 10),
+                            itemCount: controller.eventList.length,
+                            itemBuilder: (context, index) {
+                              EventData event = controller.eventList[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                      () => EventViewPage(eventDetails: event));
+                                },
                                 child: Container(
-                                    height: size.width * 0.26,
+                                    padding: const EdgeInsets.only(left: 5),
+                                    height: size.width * 0.28,
                                     width: size.width,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
@@ -57,13 +60,13 @@ class EventPage extends StatelessWidget {
                                             height: size.height,
                                             alignment: Alignment.center,
                                             width: size.width * 0.2,
-                                            decoration: BoxDecoration(
-                                              gradient:
-                                                  ColorPalette.primaryGradient,
-                                              // borderRadius: BorderRadius.circular(4),
-                                            ),
-                                            child: Image.asset(
-                                              AppImages.invitaionImage,
+                                            decoration: const BoxDecoration(
+                                                // gradient: ColorPalette
+                                                //     .primaryGradient,
+                                                // borderRadius: BorderRadius.circular(4),
+                                                ),
+                                            child: Image.memory(
+                                              event.inviationImage!,
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -117,8 +120,7 @@ class EventPage extends StatelessWidget {
                                                     ),
                                                     const SizedBox(width: 5),
                                                     Text(
-                                                      AppDefaults().dateFormat(
-                                                          event.startDate),
+                                                      "${AppDefaults().dateFormat(event.startDate)} - ${AppDefaults().dateFormat(event.endDate)}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: const TextStyle(
@@ -142,8 +144,8 @@ class EventPage extends StatelessWidget {
                                                     ),
                                                     const SizedBox(width: 5),
                                                     Text(
-                                                      AppDefaults().dateFormat(
-                                                          event.endDate),
+                                                      AppDefaults().timeFormat(
+                                                          event.time),
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: const TextStyle(
@@ -158,8 +160,10 @@ class EventPage extends StatelessWidget {
                                               ],
                                             ),
                                           ))
-                                        ])));
-                          }),
+                                        ])),
+                              );
+                            }),
+              ),
             )));
   }
 }

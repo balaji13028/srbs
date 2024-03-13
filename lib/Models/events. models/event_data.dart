@@ -1,9 +1,15 @@
+import 'dart:typed_data';
+
+import 'package:srbs/constants/import_packages.dart';
+
 class EventData {
   String? eventId;
   DateTime? startDate;
   DateTime? endDate;
   String? venue;
   DateTime? time;
+  Uint8List? inviationImage;
+  Uint8List? pdffile;
   EventType? eventType;
   EventData({
     this.eventId,
@@ -11,6 +17,8 @@ class EventData {
     this.endDate,
     this.venue,
     this.time,
+    this.inviationImage,
+    this.pdffile,
     this.eventType,
   });
 
@@ -37,6 +45,8 @@ class EventData {
       endDate: DateTime.parse(map['endDate']),
       venue: map['venue'] != null ? map['venue'] as String : null,
       time: DateTime.parse(map['time']),
+      inviationImage: base64Decode(map['invitation']),
+      pdffile: base64Decode(map['program_paper']),
       eventType: EventType(
           id: map['eventType']['_id'].toString(),
           title: map['eventType']['title'].toString(),

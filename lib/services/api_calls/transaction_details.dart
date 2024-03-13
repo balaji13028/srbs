@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:srbs/Models/transaction%20models/donation_type.dart';
+import 'package:http/http.dart' as http;
 import 'package:srbs/Models/transaction%20models/transaction_data.dart';
 
 import '../../constants/import_packages.dart';
-import 'package:http/http.dart' as http;
 
 class TransactionDetails {
   // Get all transactions.
@@ -16,24 +14,9 @@ class TransactionDetails {
             '${AppConfig.normalUrl}/transactions/userid/${userController.user.value.userId}'),
       );
       if (response.statusCode == 200) {
-        log(response.body);
+        // log(response.body);
         List<dynamic> map = jsonDecode(response.body)['data'];
-        return List.generate(
-          map.length,
-          (index) => TransactionData(
-            transId: map[index]['_id'].toString(),
-            forname: map[index]['for'].toString(),
-            gothram: map[index]['gothram'].toString(),
-            amount: map[index]['amount'],
-            donationName: map[index]['donationName'].toString(),
-            timeStamp: DateTime.parse(map[index]['createdAt']),
-            donationType: DonationType(
-                title: map[index]['donationType']['title'].toString(),
-                description:
-                    map[index]['donationType']['description'].toString(),
-                amount: map[index]['donationType']['amount'] ?? 0),
-          ),
-        );
+        return map.map((e) => TransactionData.fromMap(e)).toList();
       } else {
         log(response.body);
       }

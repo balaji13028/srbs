@@ -38,7 +38,7 @@ class LoginDetails {
         body: jsonEncode(data),
       );
       if (response.statusCode == 200) {
-        log(response.body);
+        // log(response.body);
         return jsonDecode(response.body);
       } else {
         log(response.body);
@@ -50,22 +50,22 @@ class LoginDetails {
 
   /// Create a account.
   Future createAccount(Map<String, dynamic> data) async {
-    try {
-      final response = await http.post(
-        Uri.parse(
-          '${AppConfig.baseUrl}/add',
-        ),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(data),
-      );
-      if (response.statusCode == 200) {
-        log(response.body);
-        return jsonDecode(response.body);
-      } else {
-        log(response.body);
-      }
-    } catch (e) {
-      debugPrint(e.toString());
+    // try {
+    final response = await http.post(
+      Uri.parse(
+        '${AppConfig.baseUrl}/add',
+      ),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+    if (response.statusCode == 200) {
+      // log(response.body);
+      return UserData.fromMap(jsonDecode(response.body)['data'][0]);
+    } else {
+      log(response.body);
     }
+    // } catch (e) {
+    //   debugPrint(e.toString());
+    // }
   }
 }

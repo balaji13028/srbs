@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/services/provider/shared_preference.dart';
 import 'package:srbs/utils/ui_halper.dart';
 
 class RegistrationController extends GetxController {
@@ -26,33 +27,29 @@ class RegistrationController extends GetxController {
         isVaild(false);
       }
     } else {
-      if (gender == '') {
+      if (gender.value == '') {
         EasyLoading.showInfo("Please select your gender", dismissOnTap: true);
       } else {
         try {
           isLoading(true);
-          userController.isprofileLoading(true);
           Get.offAll(() => const LandingPage());
           Map<String, dynamic> data = {
             'mobileNumber': newUser.mobileNumber,
             'userName': displayNameController.value.text,
             'gender': gender.value,
             'gothram': gothramController.value.text,
-            // 'firstName': 'null',
-            // 'lastName': 'null',
-            // 'address': 'null',
           };
 
           var res = await LoginDetails().createAccount(data);
           if (res != null) {
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setString('userData', jsonEncode((res['data'])[0]));
-            userController.user.value = UserData.fromMap((res['data'])[0]);
-            await prefs.setBool('isAuthenticated', true);
+            userController.user.value = res;
+            userController.user.value.profileStatus = '57%';
+            SharedPreferencesService prefs = SharedPreferencesService.to;
+            await prefs.saveUserData(jsonEncode(userController.user.value));
+            await prefs.setboolData('isAuthenticated', true);
           }
         } finally {
           isLoading(false);
-          userController.isprofileLoading(false);
         }
       }
     }

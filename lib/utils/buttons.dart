@@ -15,7 +15,7 @@ class Buttons {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          border: Border.all(color: ColorPalette.primaryColor),
+          border: Border.all(color: ColorPalette.secondaryColor),
           borderRadius: BorderRadius.circular(height),
         ),
         child: Text(

@@ -12,9 +12,12 @@ class AppImages {
   static const String flagImage = 'assets/images/flag.png';
   static const String backGroundImage = 'assets/images/background.png';
   static const String invitaionImage = 'assets/images/invitation.png';
+  static const String bgImage = 'assets/images/bg-image.jpg';
+  static const String splash_Image = 'assets/images/splash-12.jpg';
 
   // Icons folder
   static const String gothramIcon = 'assets/icons/gotram.png';
   static const String otpIcon = 'assets/icons/otp.png';
   static const String upiIcon = 'assets/icons/upi.png';
+  // static const String peronEditIcon = 'assets/icons/person_edit-3.png';
 }

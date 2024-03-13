@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
-import 'package:srbs/services/provider/auth_service.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
@@ -12,8 +11,18 @@ class SplashScreen extends StatelessWidget {
     return Container(
       height: size.height,
       width: size.width,
+      alignment: Alignment.center,
       decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage(AppImages.splashImage))),
+        image: DecorationImage(
+            image: AssetImage(AppImages.splash_Image), fit: BoxFit.fill),
+      ),
+      child: Hero(
+        tag: 'logo',
+        child: Image.asset(
+          AppImages.logo,
+          scale: size.width * 0.0069,
+        ),
+      ),
     );
   }
 }

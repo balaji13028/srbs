@@ -2,10 +2,12 @@ import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/utils/ui_halper.dart';
 
+import 'services/provider/shared_preference.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppUiHelper.dontAutoRotate();
-
+  await Get.put(SharedPreferencesService()).initSharedPreferences();
   runApp(const MyApp());
 }
 
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
       ),
       initialBinding: BindingsBuilder(() {
         Get.lazyPut(() => AuthService(), fenix: true);
+        Get.lazyPut(() => SharedPreferencesService(), fenix: true);
         Get.lazyPut(() => UserController(), fenix: true);
       }),
       getPages: [
