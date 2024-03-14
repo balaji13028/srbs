@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:srbs/Controllers/donation/donation_contrller.dart';
 import 'package:srbs/Models/transaction%20models/donation_type.dart';
 import 'package:srbs/constants/import_packages.dart';
-import 'package:srbs/services/provider/razorpay_integration.dart';
 import 'package:srbs/utils/buttons.dart';
 import 'package:srbs/utils/ui_halper.dart';
 import 'package:srbs/views/widgets/text%20fields/dropdown_form_widget.dart';
@@ -18,7 +17,6 @@ class DonationCard extends StatefulWidget {
 }
 
 class _DonationCardState extends State<DonationCard> {
-  final razorpayController = Get.put(RazorpayIntegration());
   final donationController = Get.put(DonationController());
 
   @override
@@ -198,8 +196,9 @@ class _DonationCardState extends State<DonationCard> {
                                   text: 'Proceed to pay',
                                   borderRadius: 4,
                                   onTap: () async {
-                                    donationController.usingRazorpayPayment(
-                                      razorpayController,
+                                    donationController.getListofUpiApps(
+                                      widget.size,
+                                      donationController,
                                     );
                                   },
                                 ),

@@ -32,8 +32,8 @@ class EventViewPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(
                   left: 20, right: 20, top: 10, bottom: 10),
-              width: size.width * 0.56,
-              height: size.height * 0.36,
+              width: size.width * 0.52,
+              height: size.height * 0.35,
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 boxShadow: AppDefaults.defaultBoxShadow,
@@ -47,7 +47,7 @@ class EventViewPage extends StatelessWidget {
                   },
                   child: Image.memory(
                     eventDetails.inviationImage!,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   )),
             ),
           ],
@@ -108,7 +108,7 @@ class EventViewPage extends StatelessWidget {
                         const Icon(Icons.calendar_month),
                         const SizedBox(width: 10),
                         Text(
-                          '${AppDefaults().dateFormat(eventDetails.startDate)} - ${AppDefaults().dateFormat(eventDetails.endDate)}',
+                          '${eventDetails.startDate} - ${eventDetails.endDate}',
                           style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -121,7 +121,7 @@ class EventViewPage extends StatelessWidget {
                         const Icon(Icons.timer),
                         const SizedBox(width: 10),
                         Text(
-                          AppDefaults().timeFormat(eventDetails.time),
+                          eventDetails.time.toString(),
                           style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,

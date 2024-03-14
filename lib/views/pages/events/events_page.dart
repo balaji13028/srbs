@@ -120,7 +120,7 @@ class EventPage extends StatelessWidget {
                                                     ),
                                                     const SizedBox(width: 5),
                                                     Text(
-                                                      "${AppDefaults().dateFormat(event.startDate)} - ${AppDefaults().dateFormat(event.endDate)}",
+                                                      "${event.startDate} - ${event.endDate}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: const TextStyle(
@@ -144,8 +144,7 @@ class EventPage extends StatelessWidget {
                                                     ),
                                                     const SizedBox(width: 5),
                                                     Text(
-                                                      AppDefaults().timeFormat(
-                                                          event.time),
+                                                      event.time.toString(),
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: const TextStyle(

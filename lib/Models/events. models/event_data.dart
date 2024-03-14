@@ -4,10 +4,10 @@ import 'package:srbs/constants/import_packages.dart';
 
 class EventData {
   String? eventId;
-  DateTime? startDate;
-  DateTime? endDate;
+  String? startDate;
+  String? endDate;
   String? venue;
-  DateTime? time;
+  String? time;
   Uint8List? inviationImage;
   Uint8List? pdffile;
   EventType? eventType;
@@ -30,10 +30,10 @@ class EventData {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'eventId': eventId,
-      'startDate': startDate?.millisecondsSinceEpoch,
-      'endDate': endDate?.millisecondsSinceEpoch,
+      'startDate': startDate,
+      'endDate': endDate,
       'venue': venue,
-      'time': time?.millisecondsSinceEpoch,
+      'time': time,
       'eventType': eventType,
     };
   }
@@ -41,10 +41,10 @@ class EventData {
   factory EventData.fromMap(Map<String, dynamic> map) {
     return EventData(
       eventId: map['_id'] != null ? map['_id'] as String : null,
-      startDate: DateTime.parse(map['startDate']),
-      endDate: DateTime.parse(map['endDate']),
+      startDate: map['startDate'],
+      endDate: map['endDate'],
       venue: map['venue'] != null ? map['venue'] as String : null,
-      time: DateTime.parse(map['time']),
+      time: map['time'],
       inviationImage: base64Decode(map['invitation']),
       pdffile: base64Decode(map['program_paper']),
       eventType: EventType(

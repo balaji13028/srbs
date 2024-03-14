@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:srbs/Models/events.%20models/event_data.dart';
 import 'package:srbs/Models/transaction%20models/donation_type.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:http/http.dart' as http;
+import 'package:srbs/services/provider/shared_preference.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
@@ -18,6 +20,8 @@ class HomeController extends GetxController {
   }
 
   fetchHomescreendata() async {
+    donationTypeList.clear();
+    upcoimgEvents.clear();
     try {
       isLoading(true);
       userController.isprofileLoading(true);
@@ -29,6 +33,14 @@ class HomeController extends GetxController {
       isLoading(false);
       userController.isprofileLoading(false);
     }
+  }
+
+  Future<void> logout() async {
+    SharedPreferencesService prefs = SharedPreferencesService.to;
+    // Clear authentication status in shared preferences
+    prefs.setboolData('isAuthenticated', false);
+    prefs.clearAllData();
+    Get.offAll(() => LoginScreen()); // Navigate to login page
   }
 
   Future homeDataApi() async {

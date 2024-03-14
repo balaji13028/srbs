@@ -48,10 +48,10 @@ class LoginController extends GetxController {
             SharedPreferencesService prefs = SharedPreferencesService.to;
             await prefs.saveUserData(jsonEncode(userController.user));
             prefs.setboolData('isAuthenticated', true);
-            numberController.value.clear();
-            gotoPage(0);
           } finally {
             isverifyOTP(false);
+            numberController.value.clear();
+            gotoPage(0);
           }
         } else {
           ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(

@@ -14,9 +14,21 @@ class UpcoimgEvents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Obx(() => controller.isLoading.value
-        ? Expanded(
-            child: Container(
+    return Obx(
+      () => controller.isLoading.value
+          ? Expanded(
+              child: Container(
+                width: size.width,
+                padding: const EdgeInsets.only(top: 15),
+                decoration: BoxDecoration(
+                  color: ColorPalette.backGroundColor,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: AppDefaults.defaultBoxShadow,
+                ),
+                child: SkeletonListView(),
+              ),
+            )
+          : Container(
               width: size.width,
               padding: const EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
@@ -24,55 +36,44 @@ class UpcoimgEvents extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: AppDefaults.defaultBoxShadow,
               ),
-              child: SkeletonListView(),
-            ),
-          )
-        : Container(
-            width: size.width,
-            padding: const EdgeInsets.only(top: 15),
-            decoration: BoxDecoration(
-              color: ColorPalette.backGroundColor,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: AppDefaults.defaultBoxShadow,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Upcoming Events',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: ColorPalette.primaryColor,
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EventPage(),
-                            )),
-                        child: const Text(
-                          'View All',
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Upcoming Events',
                           style: TextStyle(
-                            fontSize: 14,
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                             color: ColorPalette.primaryColor,
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 5),
+                        GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EventPage(),
+                              )),
+                          child: const Text(
+                            'View All',
+                            style: TextStyle(
+                              fontSize: 14,
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.w500,
+                              color: ColorPalette.primaryColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
+                  Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 10,
@@ -178,7 +179,7 @@ class UpcoimgEvents extends StatelessWidget {
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
-                                                    "${AppDefaults().dateFormat(event.startDate)} - ${AppDefaults().dateFormat(event.endDate)}",
+                                                    "${event.startDate} - ${event.endDate}",
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: const TextStyle(
@@ -202,16 +203,16 @@ class UpcoimgEvents extends StatelessWidget {
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
-                                                    AppDefaults()
-                                                        .timeFormat(event.time),
+                                                    event.time.toString(),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: const TextStyle(
-                                                        fontSize: 11,
-                                                        color: ColorPalette
-                                                            .primaryColor,
-                                                        fontWeight:
-                                                            FontWeight.w400),
+                                                      fontSize: 11,
+                                                      color: ColorPalette
+                                                          .primaryColor,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
                                                   ),
                                                 ],
                                               )
@@ -224,9 +225,11 @@ class UpcoimgEvents extends StatelessWidget {
                                 ),
                               );
                             },
-                          ))
-              ],
+                          ),
+                  )
+                ],
+              ),
             ),
-          ));
+    );
   }
 }
