@@ -179,7 +179,7 @@ class UpcoimgEvents extends StatelessWidget {
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
-                                                    "${event.startDate} - ${event.endDate}",
+                                                    "${AppDefaults().dateFormat(event.startDate)} - ${AppDefaults().dateFormat(event.endDate)}",
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: const TextStyle(
@@ -203,7 +203,8 @@ class UpcoimgEvents extends StatelessWidget {
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
-                                                    event.time.toString(),
+                                                    AppDefaults()
+                                                        .timeFormat(event.time),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: const TextStyle(
