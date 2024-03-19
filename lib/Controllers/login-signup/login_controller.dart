@@ -1,3 +1,4 @@
+import 'package:alt_sms_autofill/alt_sms_autofill.dart';
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/services/provider/shared_preference.dart';
@@ -12,7 +13,10 @@ class LoginController extends GetxController {
   var otpController = TextEditingController().obs;
   var isValid = false.obs;
   var islogin = true.obs;
+  var starttime = 30.00.obs;
+  Timer? timer;
 
+  /// MOve to next or previous index;
   gotoPage(index) async {
     pageController.animateToPage(
       index,
@@ -22,6 +26,7 @@ class LoginController extends GetxController {
     otpController.value.clear();
   }
 
+  /// Login function for both oghin and otp places.
   void login(int position) async {
     if (formKey.currentState!.validate()) {
       AppUiHelper.dismissKeyboard(context: Get.context!);
@@ -38,6 +43,7 @@ class LoginController extends GetxController {
             toastPosition: EasyLoadingToastPosition.top,
           );
         } else if (res['existance'] == false) {
+          timer!.cancel();
           return Get.off(() => RegistrationScreen());
         } else if (res['existance'] == true) {
           try {
@@ -49,11 +55,13 @@ class LoginController extends GetxController {
             await prefs.saveUserData(jsonEncode(userController.user));
             prefs.setboolData('isAuthenticated', true);
           } finally {
+            timer!.cancel();
             isverifyOTP(false);
             numberController.value.clear();
             gotoPage(0);
           }
         } else {
+          timer!.cancel();
           ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
               backgroundColor: Colors.redAccent,
               content: Text(
@@ -66,9 +74,40 @@ class LoginController extends GetxController {
         islogin(false);
         var otp = LoginDetails().getOTP(numberController.value.text);
         gotoPage(1);
+        startTimer();
+        initSmsListener();
         otpController.value.text = await otp;
       }
     }
+  }
+
+  /// Listen the incoming sms to get otp.
+  Future<void> initSmsListener() async {
+    String? commingSms;
+    try {
+      commingSms = await AltSmsAutofill().listenForSms;
+      if (commingSms != null) {
+        otpController.value.text = commingSms.toString();
+      }
+    } catch (e) {
+      print('$e Failed to get Sms.');
+    }
+  }
+
+  /// TO start the timer to disbled resend option.
+  startTimer() async {
+    starttime.value = 30.00;
+    var otp = LoginDetails().getOTP(numberController.value.text);
+    initSmsListener();
+
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (starttime.value == 0) {
+        timer.cancel();
+      } else {
+        starttime.value--;
+      }
+    });
+    otpController.value.text = await otp;
   }
 
   @override
@@ -76,6 +115,7 @@ class LoginController extends GetxController {
     numberController.value.dispose();
     otpController.value.dispose();
     pageController.dispose();
+    AltSmsAutofill().unregisterListener();
     super.dispose();
   }
 

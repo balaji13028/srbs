@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:srbs/Controllers/home%20Controllers/home_controller.dart';
 import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/views/pages/homepage/appbar_widget.dart';
+import 'package:srbs/views/pages/homepage/recent_transactions.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -15,55 +17,7 @@ class HomePage extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        appBar: AppBar(
-          leading: Visibility(
-            visible: false,
-            child: IconButton(
-              onPressed: () {},
-              icon: const CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.power_settings_new,
-                  color: ColorPalette.primaryColor,
-                ),
-              ),
-            ),
-          ),
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                AppImages.logo,
-                scale: size.height * 0.032,
-              ),
-              const SizedBox(width: 5),
-              const Text(
-                'SRBS',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  homeController.logout();
-                },
-                icon: const CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.power_settings_new,
-                    color: ColorPalette.primaryColor,
-                    size: 28,
-                  ),
-                ))
-          ],
-        ),
+        appBar: AppBarWidget(size: size),
         body: Container(
           height: size.height,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -90,8 +44,26 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 20),
                     UpcoimgEvents(controller: homeController),
                     const SizedBox(height: 20),
+                    RecentTransactions(controller: homeController, size: size),
+                    const SizedBox(height: 20),
                     Obx(() => homeController.isLoading.value
-                        ? SkeletonListTile()
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: ColorPalette.backGroundColor,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: SkeletonListTile(
+                                  hasLeading: false,
+                                )))
                         : GestureDetector(
                             onTap: () {
                               Get.dialog(

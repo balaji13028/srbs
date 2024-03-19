@@ -28,6 +28,8 @@ dependencies:
   ns_upi: ^1.0.2
   path_provider: ^2.1.2
   open_filex: ^4.4.0
+  alt_sms_autofill: ^1.0.0
+  skeletonizer: ^1.1.0
   
 
 dev_dependencies:

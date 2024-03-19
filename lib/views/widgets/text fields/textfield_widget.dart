@@ -62,6 +62,8 @@ class TextFieldWidget extends StatelessWidget {
         contentPadding: contentPadding,
         isDense: true,
         prefixIcon: prefix,
+        suffixIcon: suffix,
+        suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
         labelText: text,
         errorStyle:
             TextStyle(fontSize: 10, color: Colors.red.shade700, height: 0.1),

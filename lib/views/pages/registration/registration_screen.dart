@@ -28,20 +28,33 @@ class RegistrationScreen extends StatelessWidget {
               child: Stack(children: [
                 // Srbs name logo
                 Positioned(
+                  top: 10,
                   width: size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        AppImages.srbsWithFlag,
-                        width: size.width * 0.3,
+                      Hero(
+                        tag: 'logo',
+                        child: Image.asset(
+                          AppImages.logo,
+                          width: size.width * 0.14,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'SRBS',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 // Welcome text.
                 Positioned(
-                  top: size.height * 0.1,
+                  top: size.height * 0.09,
                   width: size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -58,15 +71,6 @@ class RegistrationScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // // Background back image.
-                // Align(
-                //   alignment: Alignment.bottomCenter,
-                //   child: Image.asset(
-                //     AppImages.registrationBGImage,
-                //     fit: BoxFit.cover,
-                //     width: size.width,
-                //   ),
-                // ),
                 // Background front image.
                 Positioned(
                   bottom: 0,
@@ -79,8 +83,8 @@ class RegistrationScreen extends StatelessWidget {
                 ),
                 // Fields Container.
                 Positioned(
-                    top: size.height * 0.17,
-                    height: size.width * 0.92,
+                    top: size.height * 0.16,
+                    height: size.height * 0.39,
                     left: size.width * 0.05,
                     right: size.width * 0.05,
                     child: Container(

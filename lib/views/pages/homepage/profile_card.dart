@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:srbs/views/pages/profile/profile_screen.dart';
@@ -13,20 +12,7 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => userController.isprofileLoading.value
-          ? Container(
-              clipBehavior: Clip.none,
-              width: size.width,
-              padding: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: ColorPalette.backGroundColor,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: AppDefaults.defaultBoxShadow,
-              ),
-              child: SkeletonListTile(
-                contentSpacing: 15,
-                hasSubtitle: true,
-                padding: const EdgeInsets.all(10),
-              ))
+          ? loadingAnimation()
           : GestureDetector(
               onTap: () {
                 Get.to(() => const ProfileScreen());
@@ -76,7 +62,7 @@ class ProfileCard extends StatelessWidget {
                             ),
                           ),
                           subtitle: Text(
-                            userController.user.value.mobileNumber.toString(),
+                            '+91-${userController.user.value.mobileNumber}',
                             style: const TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
@@ -169,6 +155,30 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
+    );
+  }
+
+  Container loadingAnimation() {
+    return Container(
+      clipBehavior: Clip.none,
+      width: size.width,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: ColorPalette.backGroundColor,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: AppDefaults.defaultBoxShadow,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: SkeletonListTile(
+          contentSpacing: 15,
+          hasSubtitle: true,
+          padding: const EdgeInsets.all(10),
+        ),
+      ),
     );
   }
 }

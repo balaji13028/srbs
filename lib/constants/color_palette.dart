@@ -13,6 +13,12 @@ class ColorPalette {
     end: Alignment.bottomRight,
   );
 
+  static Gradient cardGradient = const LinearGradient(
+    colors: [Color(0xff727293), Color(0xff616186)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
   static const Gradient secondaryGrdient = LinearGradient(
     colors: [Color(0xffECBA00), Color(0xffE79A02)],
     begin: Alignment.topLeft,
@@ -29,6 +35,7 @@ class ColorPalette {
   static Color labelTextColorgrey = const Color(0xff4b4b4b).withOpacity(0.6);
 
   static const Color primaryColor = Color(0xff000040);
+  static const Color bottomNavColor = Color(0xff333366);
   static const Color secondaryColor = Color(0xffE69702);
   static const Color backGroundColor = Color(0xffEEEEEE);
   static const Color lightprimaryColor = Color(0xffDFDFED);
