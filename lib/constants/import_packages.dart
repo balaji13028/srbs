@@ -33,7 +33,7 @@ export 'package:srbs/views/pages/login/login_screen.dart';
 export 'package:srbs/views/pages/login/splash.screen.dart';
 export 'package:srbs/views/pages/homepage/homepage.dart';
 export 'package:srbs/views/pages/homepage/profile_card.dart';
-export 'package:srbs/views/pages/homepage/upcoimg_events.dart';
+export 'package:srbs/views/pages/homepage/upcoming%20evnets/upcoming_events.dart';
 export 'package:srbs/views/pages/registration/registration_screen.dart';
 export 'package:srbs/views/pages/registration/registration_fields.dart';
 export 'package:srbs/views/pages/registration/gender_section.dart';

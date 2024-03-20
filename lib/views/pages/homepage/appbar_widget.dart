@@ -10,16 +10,18 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: const Visibility(
-        visible: false,
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          child: Icon(
-            Icons.power_settings_new,
-            color: ColorPalette.primaryColor,
+      leading: Builder(builder: (context) {
+        return IconButton(
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+          icon: Icon(
+            MdiIcons.menu,
+            color: Colors.white,
+            size: 26,
           ),
-        ),
-      ),
+        );
+      }),
       automaticallyImplyLeading: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
