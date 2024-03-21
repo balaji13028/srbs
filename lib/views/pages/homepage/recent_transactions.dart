@@ -14,25 +14,25 @@ class RecentTransactions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => controller.isLoading.value
-          ? Flexible(
-              child: Container(
-                clipBehavior: Clip.hardEdge,
-                width: size.width,
-                padding: const EdgeInsets.only(top: 15),
-                decoration: BoxDecoration(
-                  color: ColorPalette.backGroundColor,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: AppDefaults.defaultBoxShadow,
-                ),
-                child: Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(6),
-                      boxShadow: AppDefaults.defaultBoxShadow,
-                    ),
-                    child: SkeletonListView(itemCount: 5)),
+          ? Container(
+              clipBehavior: Clip.hardEdge,
+              height: size.height * 0.35,
+              width: size.width,
+              padding: const EdgeInsets.only(top: 15),
+              decoration: BoxDecoration(
+                color: ColorPalette.backGroundColor,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: AppDefaults.defaultBoxShadow,
               ),
+              child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: AppDefaults.defaultBoxShadow,
+                  ),
+                  child: SkeletonListView(itemCount: 5)),
             )
           : Container(
               clipBehavior: Clip.hardEdge,

@@ -21,19 +21,19 @@ class HomeController extends GetxController {
   }
 
   fetchHomescreendata() async {
-    // donationTypeList.clear();
-    // upcoimgEvents.clear();
-    // try {
-    isLoading(true);
-    userController.isprofileLoading(true);
-    //   var data = await homeDataApi();
-    //   if (data != null) {
-    //     donationTypeList.value = data;
-    //   }
-    // } finally {
-    //   isLoading(false);
-    //   userController.isprofileLoading(false);
-    // }
+    donationTypeList.clear();
+    upcoimgEvents.clear();
+    try {
+      isLoading(true);
+      userController.isprofileLoading(true);
+      var data = await homeDataApi();
+      if (data != null) {
+        donationTypeList.value = data;
+      }
+    } finally {
+      isLoading(false);
+      userController.isprofileLoading(false);
+    }
   }
 
   Future<void> logout() async {

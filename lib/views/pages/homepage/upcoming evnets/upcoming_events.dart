@@ -72,7 +72,22 @@ class UpcomingEvents extends StatelessWidget {
                               child: Text('No Events'),
                             ),
                           )
-                        : UpcomingEvnetCard(size: size, controller: controller),
+                        : Column(
+                            children: [
+                              ...controller.upcoimgEvents.map(
+                                (event) => Column(
+                                  children: [
+                                    UpcomingEvnetCard(
+                                      size: size,
+                                      controller: controller,
+                                      event: event,
+                                    ),
+                                    const SizedBox(height: 5),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                   )
                 ],
               ),

@@ -12,41 +12,38 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        body: Container(
-          height: size.height,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AppImages.backGroundImage),
-              fit: BoxFit.cover,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await homeController.fetchHomescreendata();
+        },
+        child: PopScope(
+          canPop: false,
+          child: Container(
+            height: size.height,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(AppImages.backGroundImage),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: RefreshIndicator(
-            onRefresh: () async {
-              await homeController.fetchHomescreendata();
-            },
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: SizedBox(
-                height: size.height,
-                width: size.width,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const SizedBox(height: 5),
-                    ProfileCard(size: size),
-                    const SizedBox(height: 20),
-                    UpcomingEvents(controller: homeController),
-                    const SizedBox(height: 20),
-                    DonationButton(homeController: homeController, size: size),
-                    const SizedBox(height: 20),
-                    RecentTransactions(controller: homeController, size: size),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+            child: ListTileTheme.merge(
+              dense: true,
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  const SizedBox(height: 5),
+                  ProfileCard(size: size),
+                  const SizedBox(height: 20),
+                  UpcomingEvents(controller: homeController),
+                  const SizedBox(height: 20),
+                  DonationButton(homeController: homeController, size: size),
+                  const SizedBox(height: 20),
+                  RecentTransactions(controller: homeController, size: size),
+                  const SizedBox(height: 50),
+                ],
               ),
             ),
           ),
