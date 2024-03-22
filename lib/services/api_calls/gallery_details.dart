@@ -9,11 +9,9 @@ class GalleryDetails {
     try {
       final response =
           await http.get(Uri.parse('${AppConfig.normalUrl}/images'));
-      // if (response.) ;
+
       if (response.statusCode == 200) {
         List<dynamic> map = jsonDecode(response.body)['images'];
-        // print(map);
-        // return [];
         return map.map((e) => GalleryImagesData.fromMap(e)).toList();
       } else {
         return [];

@@ -14,7 +14,7 @@ class LandingPage extends GetView<LandingPageController> {
     Get.put(LandingPageController());
     return Obx(() => Scaffold(
         drawer: SideDrawer(),
-        drawerEnableOpenDragGesture: true,
+        drawerEnableOpenDragGesture: false,
         extendBody: true,
         appBar: controller.tabIndex.value == 1
             ? AppBarWidget(size: Get.size)

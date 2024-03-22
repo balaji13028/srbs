@@ -1,14 +1,15 @@
 import 'package:srbs/Controllers/gallery%20/gallery-controller.dart';
+import 'package:srbs/Models/gallery%20models/galleryimages_data.dart';
 import 'package:srbs/constants/import_packages.dart';
 
 class ViewImage extends StatelessWidget {
   final Size size;
-  final Uint8List imagePath;
+  final GalleryImagesData imageDetails;
   final GalleryController controller;
   const ViewImage(
       {super.key,
       required this.size,
-      required this.imagePath,
+      required this.imageDetails,
       required this.controller});
 
   @override
@@ -23,7 +24,7 @@ class ViewImage extends StatelessWidget {
             },
             child: Center(
                 child: Image.memory(
-              imagePath,
+              imageDetails.image,
               width: size.width,
               height: size.height,
             )),
@@ -33,9 +34,16 @@ class ViewImage extends StatelessWidget {
                 child: SizedBox(
                   height: 100,
                   child: AppBar(
-                    backgroundColor: Colors.black.withOpacity(0.65),
-                    automaticallyImplyLeading: true,
-                  ),
+                      backgroundColor: Colors.black.withOpacity(0.65),
+                      automaticallyImplyLeading: true,
+                      centerTitle: false,
+                      title: Text(
+                        AppDefaults().dayFormat(imageDetails.timeStamp),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      )),
                 ),
               )),
         ],

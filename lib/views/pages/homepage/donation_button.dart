@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:srbs/Controllers/home%20Controllers/home_controller.dart';
 import 'package:srbs/constants/import_packages.dart';
+import 'package:srbs/views/pages/donation/payment_screen.dart';
 
 class DonationButton extends StatelessWidget {
   const DonationButton({
@@ -38,9 +39,8 @@ class DonationButton extends StatelessWidget {
             )
           : GestureDetector(
               onTap: () {
-                Get.dialog(
-                  DonationCard(
-                    size: size,
+                Get.to(
+                  () => Donationscreen(
                     donationDetails: homeController.donationTypeList,
                   ),
                 );
