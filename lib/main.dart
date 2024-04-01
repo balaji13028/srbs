@@ -7,6 +7,7 @@ import 'services/provider/shared_preference.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppUiHelper.dontAutoRotate();
+
   await Get.put(SharedPreferencesService()).initSharedPreferences();
   runApp(const MyApp());
 }

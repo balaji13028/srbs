@@ -17,7 +17,7 @@ class RegistrationFields extends StatelessWidget {
         TextFieldWidget(
           borderColor: Colors.black,
           lableColor: Colors.black54,
-          text: 'Display Name',
+          text: 'Display Name / పేరు ',
           prefix: Icon(
             CupertinoIcons.person,
             color: Colors.black,
@@ -35,7 +35,7 @@ class RegistrationFields extends StatelessWidget {
         TextFieldWidget(
           borderColor: Colors.black,
           lableColor: Colors.black54,
-          text: 'Gothram',
+          text: 'Gothram / గోత్రం',
           prefix: Image.asset(
             AppImages.gothramIcon,
             width: size.width * 0.1,

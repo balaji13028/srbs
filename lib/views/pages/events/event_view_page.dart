@@ -108,7 +108,7 @@ class EventViewPage extends StatelessWidget {
                         const Icon(Icons.calendar_month),
                         const SizedBox(width: 10),
                         Text(
-                          "${AppDefaults().dateFormat(eventDetails.startDate)} - ${AppDefaults().dateFormat(eventDetails.endDate)}",
+                          "${eventDetails.startDate} - ${eventDetails.endDate}",
                           style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -121,7 +121,7 @@ class EventViewPage extends StatelessWidget {
                         const Icon(Icons.timer),
                         const SizedBox(width: 10),
                         Text(
-                          AppDefaults().timeFormat(eventDetails.time),
+                          eventDetails.time.toString(),
                           style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,

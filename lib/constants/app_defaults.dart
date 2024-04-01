@@ -31,5 +31,8 @@ class AppDefaults {
   static Duration defaultDuration = const Duration(milliseconds: 300);
 
   String dateFormat(date) => DateFormat('dd/MM/yy').format(date).toString();
+  String dayFormat(DateTime date) => date.year == DateTime.now().year
+      ? DateFormat('MMM dd').format(date).toString()
+      : DateFormat('MMM dd, yyyy').format(date).toString();
   String timeFormat(date) => DateFormat.jm().format(date).toString();
 }

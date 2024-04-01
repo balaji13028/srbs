@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/views/pages/gallery/gallery_page.dart';

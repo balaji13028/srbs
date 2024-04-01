@@ -19,5 +19,5 @@ class AppImages {
   static const String gothramIcon = 'assets/icons/gotram.png';
   static const String otpIcon = 'assets/icons/otp.png';
   static const String upiIcon = 'assets/icons/upi.png';
-  // static const String peronEditIcon = 'assets/icons/person_edit-3.png';
+  static const String loginIcon = 'assets/icons/mobile_login.png';
 }

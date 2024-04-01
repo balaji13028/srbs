@@ -5,7 +5,6 @@ import 'package:ns_upi/ns_upi.dart';
 import 'package:srbs/Models/transaction%20models/donation_type.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/services/api_calls/transaction_details.dart';
-import 'package:srbs/views/pages/donation/payment_screen.dart';
 import 'package:srbs/views/pages/donation/upiapps_list.dart';
 
 class DonationController extends GetxController {
@@ -101,12 +100,12 @@ class DonationController extends GetxController {
       EasyLoading.showSuccess('Payment Sucessful ${response.rawResponse}',
           dismissOnTap: true);
     } else {
-      showDialog(
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return ErrorPyment(message: response.status.toString());
-        },
-      ).then((value) => Get.back());
+      // showDialog(
+      //   context: Get.context!,
+      //   builder: (BuildContext context) {
+      //     return ErrorPyment(message: response.status.toString());
+      //   },
+      // ).then((value) => Get.back());
     }
   }
 }

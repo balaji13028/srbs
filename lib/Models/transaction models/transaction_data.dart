@@ -12,6 +12,7 @@ class TransactionData {
   String? orderId;
   String? paymentStatus;
   String? paymentId;
+  String? recieptId;
   TransactionData({
     this.transId,
     this.donationName,
@@ -23,6 +24,7 @@ class TransactionData {
     this.orderId,
     this.paymentStatus,
     this.timeStamp,
+    this.recieptId,
   });
 
   @override
@@ -59,6 +61,7 @@ class TransactionData {
       orderId: map['order_id'] != null ? map['order_id'] as String : null,
       paymentStatus: map['payment_status'].toString(),
       paymentId: map['payment_id'] != null ? map['payment_id'] as String : null,
+      recieptId: map['reciept_id'].toString(),
     );
   }
 
