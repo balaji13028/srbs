@@ -24,7 +24,7 @@ class LandingPage extends GetView<LandingPageController> {
           color: const Color(0xff333366),
           backgroundColor: Colors.transparent,
           index: controller.tabIndex.value,
-          buttonBackgroundColor: ColorPalette.bottomNavButtonGradient,
+          buttonBackgroundColor: ColorPalette.bottomNavButtonSolid,
           items: [
             CurvedNavigationBarItem(
               child: const Icon(

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
-import 'package:srbs/Controllers/gallery%20/gallery-controller.dart';
+import 'package:srbs/Controllers/gallery/gallery_controller.dart';
 import 'package:srbs/Models/gallery%20models/galleryimages_data.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/views/pages/gallery/view_image.dart';

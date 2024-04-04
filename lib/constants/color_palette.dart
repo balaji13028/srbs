@@ -42,4 +42,5 @@ class ColorPalette {
   static const Color greyColor = Color(0xff4b4b4b);
   static const Color lightGreenColor = Color(0xffc3eca4);
   static const Color darkGreenColor = Color(0xff4c7c27);
+  static const Color bottomNavButtonSolid = Color(0xff6F6F93);
 }
