@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:srbs/Controllers/event/event_controller.dart';
 import 'package:srbs/Models/events.%20models/event_data.dart';
 import 'package:srbs/constants/import_packages.dart';
 import 'package:srbs/views/pages/events/event_card.dart';
