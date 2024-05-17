@@ -34,76 +34,78 @@ class RecentTransactions extends StatelessWidget {
                   ),
                   child: SkeletonListView(itemCount: 5)),
             )
-          : Container(
-              clipBehavior: Clip.hardEdge,
-              width: size.width,
-              padding: const EdgeInsets.only(top: 15),
-              decoration: BoxDecoration(
-                color: ColorPalette.backGroundColor,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: AppDefaults.defaultBoxShadow,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Recent Transactions',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: ColorPalette.primaryColor,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) =>
-                                        const TransactionsPage())));
-                          },
-                          child: const Text(
-                            'View All',
-                            style: TextStyle(
-                              fontSize: 14,
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w500,
-                              color: ColorPalette.primaryColor,
+          : controller.recentTransactions.isEmpty
+              ? const SizedBox()
+              : Container(
+                  clipBehavior: Clip.hardEdge,
+                  width: size.width,
+                  padding: const EdgeInsets.only(top: 15),
+                  decoration: BoxDecoration(
+                    color: ColorPalette.backGroundColor,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: AppDefaults.defaultBoxShadow,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Recent Transactions',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: ColorPalette.primaryColor,
+                              ),
                             ),
-                          ),
+                            const SizedBox(width: 5),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            const TransactionsPage())));
+                              },
+                              child: const Text(
+                                'View All',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.w500,
+                                  color: ColorPalette.primaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  // Transactions display.
-                  Container(
-                    clipBehavior: Clip.hardEdge,
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Column(
-                      children: [
-                        ...controller.recentTransactions.map(
-                          (transaction) => TransactionCard(
-                            size: size,
-                            transaction: transaction,
-                          ),
+                      ),
+                      // Transactions display.
+                      Container(
+                        clipBehavior: Clip.hardEdge,
+                        margin: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                      ],
-                    ),
+                        child: Column(
+                          children: [
+                            ...controller.recentTransactions.map(
+                              (transaction) => TransactionCard(
+                                size: size,
+                                transaction: transaction,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
     );
   }
 }

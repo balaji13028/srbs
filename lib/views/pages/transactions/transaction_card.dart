@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:srbs/Models/transaction%20models/transaction_data.dart';
 import 'package:srbs/constants/import_packages.dart';
-import 'package:srbs/views/pages/transactions/ayment_reciept.dart';
+import 'package:srbs/views/pages/transactions/payment_reciept.dart';
 
 class TransactionCard extends StatelessWidget {
   final Size size;
